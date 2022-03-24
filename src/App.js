@@ -1,3 +1,7 @@
+import React, { Component } from "react";
+
+import $ from 'jquery'
+
 import { Navigation, Pagination, A11y } from 'swiper';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -9,35 +13,81 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
-import React, { useState, useEffect } from "react";
-const firstUrl = "https://avatars.githubusercontent.com/u/810438?v=4";
-//"https://api.github.com/users/gaearon";
-const secondUrl = "https://avatars.githubusercontent.com/u/3624098?v=4";
-//"https://api.github.com/users/acdlite";
-const thirdUrl = "https://avatars.githubusercontent.com/u/499550?v=4";
-//"https://api.github.com/users/yyx990803";
-const forthUrl = "https://avatars.githubusercontent.com/u/36901?v=4";
-//"https://api.github.com/users/unclebob";
-const fifthUrl = "https://avatars.githubusercontent.com/u/120859?v=4";
-//"https://api.github.com/users/martinfowler";
+export default class App extends Component {
+  jQuerycode = () => {
+    $(document).ready(function () {
 
-export default function Slider () {
+      $.ajax({
+        url: "https://api.github.com/users/gaearon",
+        type: "GET",
+        success: function(result) {
+          var firstUrl = (result.avatar_url);
+          $("#firstUrl").attr('src', firstUrl);
+        },
+        error: function(error) {
+          var firstUrl = ("not available");
+          $("#firstUrl").html(firstUrl);
+        }
+      });
 
-  const [img, setImg] = useState();
+      $.ajax({
+        url: "https://api.github.com/users/acdlite",
+        type: "GET",
+        success: function(result) {
+          var secondUrl = (result.avatar_url);
+          $("#secondUrl").attr('src', secondUrl);
+        },
+        error: function(error) {
+          var secondUrl = ("not available");
+          $("#secondUrl").html(secondUrl);
+        }
+      });
 
-  const firstFetchImage = async () => {
-    const res = await fetch(firstUrl);
-    const imageBlob = await res.blob();
-    const imageObjectURL = URL.createObjectURL(imageBlob);
-    setImg(imageObjectURL);
-  };
+      $.ajax({
+        url: "https://api.github.com/users/yyx990803",
+        type: "GET",
+        success: function(result) {
+          var thirdUrl = (result.avatar_url);
+          $("#thirdUrl").attr('src', thirdUrl);
+        },
+        error: function(error) {
+          var thirdUrl = ("not available");
+          $("#thirdUrl").html(thirdUrl);
+        }
+      });
 
-  useEffect(() => {
-    firstFetchImage();
-  }, []);
+      $.ajax({
+        url: "https://api.github.com/users/unclebob",
+        type: "GET",
+        success: function(result) {
+          var forthUrl = (result.avatar_url);
+          $("#forthUrl").attr('src', forthUrl);
+        },
+        error: function(error) {
+          var forthUrl = ("not available");
+          $("#forthUrl").html(forthUrl);
+        }
+      });
 
-  return (
-    <>
+      $.ajax({
+        url: "https://api.github.com/users/martinfowler",
+        type: "GET",
+        success: function(result) {
+          var fifthUrl = (result.avatar_url);
+          $("#fifthUrl").attr('src', fifthUrl);
+        },
+        error: function(error) {
+          var fifthUrl = ("not available");
+          $("#fifthUrl").html(fifthUrl);
+        }
+      });
+    });
+  }
+  componentDidMount(){
+    this.jQuerycode()
+  }
+  render() {
+    return (
       <div className="Slider">
         <h1><img src={require('./GitHub-logo.png')} height="48" /> Avatars Slider</h1>
         <Swiper
@@ -47,19 +97,18 @@ export default function Slider () {
           navigation
           pagination={{ clickable: true }}
         >
-          <SwiperSlide><img src={img} alt="image" />
+          <SwiperSlide><img id="firstUrl" alt="image" />
           </SwiperSlide>
-          <SwiperSlide><img src={secondUrl} alt="image" />
+          <SwiperSlide><img id="secondUrl" alt="image" />
           </SwiperSlide>
-          <SwiperSlide><img src={thirdUrl} alt="image" />
+          <SwiperSlide><img id="thirdUrl" alt="image" />
           </SwiperSlide>
-          <SwiperSlide><img src={forthUrl} alt="image" />
+          <SwiperSlide><img id="forthUrl" alt="image" />
           </SwiperSlide>
-          <SwiperSlide><img src={fifthUrl} alt="image" />
+          <SwiperSlide><img id="fifthUrl" alt="image" />
           </SwiperSlide>
         </Swiper>
       </div>
       );
-    </>
-  );
+  }
 }
