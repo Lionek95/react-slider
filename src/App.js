@@ -15,7 +15,7 @@ import 'swiper/css/scrollbar';
 
 export default class App extends Component {
   jQuerycode = () => {
-    $(document).ready(function () {
+    $(window).on("load", function () {
 
       $.ajax({
         url: "https://api.github.com/users/gaearon",
@@ -83,13 +83,15 @@ export default class App extends Component {
       });
     });
   }
+
   componentDidMount(){
     this.jQuerycode()
   }
+
   render() {
     return (
       <div className="Slider">
-        <h1><img src={require('./GitHub-logo.png')} height="48" /> Avatars Slider</h1>
+        <h1><span>GitHub</span> Avatars Slider</h1>
         <Swiper
           modules={[Navigation, Pagination, A11y]}
           spaceBetween={0}
@@ -97,16 +99,11 @@ export default class App extends Component {
           navigation
           pagination={{ clickable: true }}
         >
-          <SwiperSlide><img id="firstUrl" alt="image" />
-          </SwiperSlide>
-          <SwiperSlide><img id="secondUrl" alt="image" />
-          </SwiperSlide>
-          <SwiperSlide><img id="thirdUrl" alt="image" />
-          </SwiperSlide>
-          <SwiperSlide><img id="forthUrl" alt="image" />
-          </SwiperSlide>
-          <SwiperSlide><img id="fifthUrl" alt="image" />
-          </SwiperSlide>
+          <SwiperSlide><img id="firstUrl" alt="image" /></SwiperSlide>
+          <SwiperSlide><img id="secondUrl" alt="image" /></SwiperSlide>
+          <SwiperSlide><img id="thirdUrl" alt="image" /></SwiperSlide>
+          <SwiperSlide><img id="forthUrl" alt="image" /></SwiperSlide>
+          <SwiperSlide><img id="fifthUrl" alt="image" /></SwiperSlide>
         </Swiper>
       </div>
       );

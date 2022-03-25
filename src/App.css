@@ -14,6 +14,10 @@ h1 {
   color: #9E579D;
 }
 
+span {
+  color: #fff;
+}
+
 .swiper {
   height: 550px;
   max-width: 800px;
